@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Sửa Thông Tin Sách</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        button, .btn {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-submit {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-cancel {
+            background-color: #666;
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #555;
+        }
+        
+        .book-id {
+            background-color: #e3f2fd;
+            color: #1976D2;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>✏️ Sửa Thông Tin Sách</h1>
+        
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+        
+        <div th:if="${book}">
+            <div class="book-id">
+                Mã sách: <span th:text="${book.id}"></span>
+            </div>
+            
+            <form th:action="'/books/edit/' + ${book.id}" method="post">
+                <input type="hidden" name="id" th:value="${book.id}">
+                
+                <div class="form-group">
+                    <label for="title">Tên Sách</label>
+                    <input type="text" id="title" name="title" th:value="${book.title}" 
+                           placeholder="Nhập tên sách..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="author">Tác Giả</label>
+                    <input type="text" id="author" name="author" th:value="${book.author}" 
+                           placeholder="Nhập tên tác giả..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Giá (VNĐ)</label>
+                    <input type="number" id="price" name="price" th:value="${book.price}" 
+                           placeholder="Nhập giá sách..." min="0" required>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-submit">Lưu Thay Đổi</button>
+                    <a href="/books" class="btn btn-cancel">Quay Lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

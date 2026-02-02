@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Thêm Sách Mới</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        button, .btn {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-cancel {
+            background-color: #666;
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>📖 Thêm Sách Mới</h1>
+        
+        <form action="/books/add" method="post">
+            <div class="form-group">
+                <label for="title">Tên Sách</label>
+                <input type="text" id="title" name="title" 
+                       placeholder="Nhập tên sách..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="author">Tác Giả</label>
+                <input type="text" id="author" name="author" 
+                       placeholder="Nhập tên tác giả..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Giá (VNĐ)</label>
+                <input type="number" id="price" name="price" 
+                       placeholder="Nhập giá sách..." min="0" required>
+            </div>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-submit">Thêm Sách</button>
+                <a href="/books" class="btn btn-cancel">Quay Lại</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
